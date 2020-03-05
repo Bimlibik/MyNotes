@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">MyNotes</string>
+    <string name="fab_add_new_description">Создать</string>
+    <string name="fab_edit_description">Редактировать</string>
+    <string name="tv_title">Заголовок</string>
+    <string name="tv_date_of_creation">Добавлено: 06.12.2019,</string>
+    <string name="date_of_edit">Отредактировано: 06.12.2019</string>
+    <string name="tv_list_is_empty">Список пуст</string>
+    <string name="tv_search_is_empty">Совпадений не найдено</string>
+    <string name="tv_description">Описание</string>
+    <string name="field_subtask_hint">Введите задачу</string>
+    <string name="btn_add_subtask_description">Добавить задачу в список</string>
+    <string name="toolbar_new_note">Новая заметка</string>
+    <string name="toolbar_new_task">Новая задача</string>
+    <string name="toolbar_edit_note">Редактирование заметки</string>
+    <string name="toolbar_edit_task">Редактирование задачи</string>
+    <string name="toolbar_note_detail">Просмотр заметки</string>
+    <string name="toolbar_task_detail">Просмотр задачи</string>
+    <string name="note_title_is_empty">(Без названия…)</string>
+
+
+    <!--Formatted strings-->
+    <string name="format_created_at">Добавлено: %s,</string>
+    <string name="format_edited_at">Отредактировано: %s</string>
+    <string name="menu_title_search">Поиск</string>
+    <string name="menu_title_archive">Архив</string>
+    <string name="menu_title_filter">Фильтр</string>
+    <string name="menu_filter_by_date_creation">По дате создания</string>
+    <string name="menu_filter_by_date_edit">По дате редактирования</string>
+    <string name="menu_filter_by_alphabetically">По алфавиту</string>
+    <string name="menu_filter_all">Все</string>
+    <string name="menu_filter_complete">Выполненные</string>
+    <string name="menu_filter_active">Невыполненные</string>
+    <string name="menu_title_settings">Настройки</string>
+    <string name="tv_edit_note">Редактировать</string>
+    <string name="tv_archive">В архив</string>
+    <string name="tv_return">Перенести из архива</string>
+    <string name="tv_share">Поделиться</string>
+    <string name="tv_delete">Удалить</string>
+    <string name="snackbar_note_deleted">Заметка удалена</string>
+    <string name="snackbar_task_deleted">Задача удалена</string>
+    <string name="snackbar_note_saved">Заметка сохранена</string>
+    <string name="snackbar_note_archived">Заметка перенесена в архив</string>
+    <string name="snackbar_task_archived">Задача перенесена в архив</string>
+    <string name="snackbar_note_undo_archived">Заметка перенесена из архива</string>
+    <string name="snackbar_task_undo_archived">Задача перенесена из архива</string>
+    <string name="share_note_title">Отправить заметку через</string>
+    <string name="share_task_title">Отправить задачу через</string>
+    <string name="search_notes_hint">Поиск по заметкам…</string>
+    <string name="search_tasks_hint">Поиск по задачам…</string>
+    <string name="snacbar_note_not_available">Заметка не найдена</string>
+    <string name="snacbar_task_not_available">Задача не найдена</string>
+    <string name="snackbar_action_undo">Отмена</string>
+    <string name="snackbar_action_to_list">К списку</string>
+    <string name="snacbar_undo_deleted">Удаление отменено</string>
+    <string name="toolbar_title_new_task">Новая задача</string>
+    <string name="menu_title_return">Вернуться к заметкам</string>
+
+    <!--Arrays-->
+    <string-array name="tabs_title">
+        <item>Заметки</item>
+        <item>Задачи</item>
+    </string-array>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_archive"
+        app:showAsAction="ifRoom"
+        android:title="@string/tv_archive"
+        android:icon="@drawable/ic_overflow_archive"/>
+    <item
+        android:id="@+id/item_return"
+        app:showAsAction="ifRoom"
+        android:title="Переместить из архива"
+        android:icon="@drawable/ic_overflow_archive"
+        android:visible="false"/>
+    <item
+        android:id="@+id/item_share"
+        app:showAsAction="ifRoom"
+        android:title="@string/tv_share"
+        android:icon="@drawable/ic_overflow_share"/>
+    <item
+        android:id="@+id/item_delete"
+        app:showAsAction="ifRoom"
+        android:title="@string/tv_delete"
+        android:icon="@drawable/ic_overflow_delete"/>
+</menu>

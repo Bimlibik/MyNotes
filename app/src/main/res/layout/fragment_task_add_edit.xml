@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundLight"
+    tools:ignore="Autofill">
+
+    <LinearLayout
+        android:id="@+id/layout_task"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:titleTextColor="@color/colorPrimaryText"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@string/toolbar_title_new_task" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryLight">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/field_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:hint="@string/tv_title"
+                    android:background="@android:color/transparent"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@id/field_subtask" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_new_subtask_field">
+
+            <EditText
+                android:id="@+id/field_subtask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:hint="@string/field_subtask_hint"
+                android:background="@android:color/transparent"
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:gravity="top" />
+
+            <ImageButton
+                android:id="@+id/btn_add_subtask"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignEnd="@id/field_subtask"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_btn_new_subtask"
+                android:contentDescription="@string/btn_add_subtask_description" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_subtask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:useCompatPadding="true"
+        app:layout_anchor="@id/layout_task"
+        app:layout_anchorGravity="end|bottom"
+        app:fabSize="normal"
+        android:src="@drawable/ic_fab_done"
+        android:contentDescription="@string/fab_edit_description" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
