@@ -9,11 +9,20 @@
         app:destination="@id/pages_container"
         app:enterAnim="@anim/anim_slide_in_right"
         app:exitAnim="@anim/anim_slide_out_right" />
+    <action
+        android:id="@+id/action_global_fade"
+        app:destination="@id/pages_container"
+        app:enterAnim="@anim/anim_fade_in"
+        app:exitAnim="@anim/anim_slide_out_right" />
 
     <fragment
         android:id="@+id/pages_container"
         android:name="com.foxy.mynotes.ui.fragments.PagesContainerFragment"
         android:label="pages_container">
+        <argument
+            android:name="page"
+            app:argType="integer"
+            android:defaultValue="0"/>
         <action
             android:id="@+id/action_notes_to_note_details"
             app:destination="@id/note_detail"
@@ -22,8 +31,7 @@
         <action
             android:id="@+id/action_notes_to_add_edit_note"
             app:destination="@id/add_edit_note"
-            app:enterAnim="@anim/anim_slide_in_left"
-            app:exitAnim="@anim/anim_slide_out_left" />
+            app:exitAnim="@anim/anim_fade_out" />
         <action
             android:id="@+id/action_tasks_to_task_detail"
             app:destination="@id/task_detail"
@@ -32,8 +40,7 @@
         <action
             android:id="@+id/action_tasks_to_add_edit_tasks"
             app:destination="@id/add_edit_task"
-            app:enterAnim="@anim/anim_slide_in_left"
-            app:exitAnim="@anim/anim_slide_out_left"/>
+            app:exitAnim="@anim/anim_fade_out" />
     </fragment>
 
     <fragment

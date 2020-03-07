@@ -11,6 +11,9 @@ import com.foxy.mynotes.data.entity.Note
 import com.foxy.mynotes.data.entity.NoteAndTaskDate
 import com.foxy.mynotes.mvp.presenter.NotePresenter
 import com.foxy.mynotes.mvp.view.NoteView
+import com.foxy.mynotes.utils.Page
+import com.foxy.mynotes.utils.registerAnimation
+import com.foxy.mynotes.utils.registerExitAnimation
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -31,8 +34,11 @@ class AddEditNoteFragment : MvpAppCompatFragment(), NoteView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        val view: View = inflater.inflate(R.layout.fragment_note_add_edit, container, false)
+
+        view.registerAnimation(context)
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_note_add_edit, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,10 +70,7 @@ class AddEditNoteFragment : MvpAppCompatFragment(), NoteView {
     }
 
     override fun onNoteSaved(id: String) {
-        val action =
-            AddEditNoteFragmentDirections.actionAddEditNoteToNoteDetail(
-                id
-            )
+        val action = AddEditNoteFragmentDirections.actionAddEditNoteToNoteDetail(id)
         findNavController().navigate(action)
     }
 
@@ -76,7 +79,9 @@ class AddEditNoteFragment : MvpAppCompatFragment(), NoteView {
     }
 
     override fun openNotesListScreen() {
-        findNavController().navigate(R.id.action_global_main_screen)
+        val action = PagesContainerFragmentDirections.actionGlobalFade(Page.NOTES)
+        findNavController().navigate(action)
+        registerExitAnimation(context, view!!)
     }
 
     private fun setupToolbar() {

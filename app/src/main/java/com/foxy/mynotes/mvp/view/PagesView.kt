@@ -11,4 +11,6 @@ interface PagesView : MvpView {
     fun onArchiveClose()
 
     fun openMainScreen()
+
+    fun closeApp()
 }

@@ -22,11 +22,16 @@ class PagesPresenter : MvpPresenter<PagesView>() {
         updateArchiveStatus()
     }
 
-    fun openOrCloseArchive() {
-        isArchive = !isArchive
-        setArchiveStatus(isArchive)
+    fun openArchive() {
+        openOrCloseArchive()
+    }
 
-        viewState.openMainScreen()
+    fun closeArchiveOrApp() {
+        if (isArchive) {
+            openOrCloseArchive()
+        } else {
+            viewState.closeApp()
+        }
     }
 
     fun updateItemTitle() : Int {
@@ -35,6 +40,12 @@ class PagesPresenter : MvpPresenter<PagesView>() {
         } else {
             R.string.menu_title_archive
         }
+    }
+
+    private fun openOrCloseArchive() {
+        isArchive = !isArchive
+        setArchiveStatus(isArchive)
+        viewState.openMainScreen()
     }
 
     private fun updateView() {

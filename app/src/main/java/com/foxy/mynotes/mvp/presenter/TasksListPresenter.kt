@@ -44,6 +44,7 @@ class TasksListPresenter : MvpPresenter<TasksListView>() {
 
     fun updateCompleted(task: Task, completed: Boolean) {
         tasksRepository.updateTaskCompleted(task.id, completed)
+        tasksRepository.updateSubtasksCompleted(task.id, completed)
         tasks.forEach {
             if (it.id == task.id) it.isChecked = completed
         }

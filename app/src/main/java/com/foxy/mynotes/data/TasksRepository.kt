@@ -42,6 +42,10 @@ class TasksRepository constructor(
     fun updateTaskCompleted(taskId: String, completed: Boolean) {
         executors.discIO.execute {
             taskDao.updateCompleted(taskId, completed)
+        }
+    }
+    fun updateSubtasksCompleted(taskId: String, completed: Boolean) {
+        executors.discIO.execute {
             subTaskDao.updateTaskCompleted(taskId, completed)
         }
     }

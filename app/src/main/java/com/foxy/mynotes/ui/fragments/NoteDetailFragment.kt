@@ -11,6 +11,7 @@ import com.foxy.mynotes.R
 import com.foxy.mynotes.data.entity.Note
 import com.foxy.mynotes.mvp.presenter.NoteDetailPresenter
 import com.foxy.mynotes.mvp.view.NoteDetailView
+import com.foxy.mynotes.utils.Page
 import com.foxy.mynotes.utils.showSnackBar
 import com.foxy.mynotes.utils.showSnackBarWithButton
 import com.google.android.material.snackbar.Snackbar
@@ -132,8 +133,7 @@ class NoteDetailFragment : MvpAppCompatFragment(), NoteDetailView {
     }
 
     override fun openNotesListScreen() {
-        val action =
-            PagesContainerFragmentDirections.actionGlobalMainScreen()
+        val action = PagesContainerFragmentDirections.actionGlobalMainScreen(Page.NOTES)
         findNavController().navigate(action)
     }
 

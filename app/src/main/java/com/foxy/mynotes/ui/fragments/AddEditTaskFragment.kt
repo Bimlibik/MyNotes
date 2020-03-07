@@ -19,6 +19,9 @@ import com.foxy.mynotes.mvp.presenter.TaskPresenter
 import com.foxy.mynotes.mvp.view.TaskView
 import com.foxy.mynotes.ui.adapters.ItemClickListener
 import com.foxy.mynotes.ui.adapters.SubTasksAdapter
+import com.foxy.mynotes.utils.Page
+import com.foxy.mynotes.utils.registerAnimation
+import com.foxy.mynotes.utils.registerExitAnimation
 import kotlinx.android.synthetic.main.fragment_task_add_edit.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -50,8 +53,10 @@ class AddEditTaskFragment : MvpAppCompatFragment(), TaskView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_task_add_edit, container, false)
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_task_add_edit, container, false)
+        view.registerAnimation(context)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,10 +98,7 @@ class AddEditTaskFragment : MvpAppCompatFragment(), TaskView {
     }
 
     override fun onTaskSaved(id: String) {
-        val action =
-            AddEditTaskFragmentDirections.actionAddEditTaskToTaskDetail(
-                id
-            )
+        val action = AddEditTaskFragmentDirections.actionAddEditTaskToTaskDetail(id)
         findNavController().navigate(action)
     }
 
@@ -105,7 +107,9 @@ class AddEditTaskFragment : MvpAppCompatFragment(), TaskView {
     }
 
     override fun openTasksListScreen() {
-        findNavController().navigate(R.id.action_global_main_screen)
+        val action = PagesContainerFragmentDirections.actionGlobalFade(Page.TASKS)
+        findNavController().navigate(action)
+        registerExitAnimation(context, view!!)
     }
 
     private fun setupToolbar() {

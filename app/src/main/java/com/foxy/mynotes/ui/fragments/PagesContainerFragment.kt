@@ -6,10 +6,12 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.foxy.mynotes.R
 import com.foxy.mynotes.mvp.presenter.PagesPresenter
 import com.foxy.mynotes.mvp.view.PagesView
 import com.foxy.mynotes.ui.adapters.SimplePagerAdapter
+import com.foxy.mynotes.utils.Page
 import kotlinx.android.synthetic.main.fragment_pages_container.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -20,8 +22,7 @@ class PagesContainerFragment : MvpAppCompatFragment(), PagesView {
     lateinit var presenter: PagesPresenter
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_pages_container, container, false)
@@ -30,6 +31,7 @@ class PagesContainerFragment : MvpAppCompatFragment(), PagesView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
+        onBackPressed()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -48,7 +50,7 @@ class PagesContainerFragment : MvpAppCompatFragment(), PagesView {
                 true
             }
             R.id.item_archive -> {
-                presenter.openOrCloseArchive()
+                presenter.openArchive()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -66,19 +68,25 @@ class PagesContainerFragment : MvpAppCompatFragment(), PagesView {
     }
 
     override fun openMainScreen() {
-        val action = PagesContainerFragmentDirections.actionGlobalMainScreen()
+        val action = PagesContainerFragmentDirections.actionGlobalMainScreen(Page.NOTES)
         findNavController().navigate(action)
+    }
+
+    override fun closeApp() {
+        activity?.finishAndRemoveTask()
     }
 
     private fun setupViewPager() {
         val tabTitles: Array<String> = resources.getStringArray(R.array.tabs_title)
         val pageAdapter = SimplePagerAdapter(childFragmentManager)
+        val args: PagesContainerFragmentArgs by navArgs()
 
         pageAdapter.addFragment(NotesFragment())
         pageAdapter.addFragment(TasksFragment())
         pageAdapter.addTitles(tabTitles)
 
         viewpager.adapter = pageAdapter
+        viewpager.currentItem = args.page
         tabs.setupWithViewPager(viewpager)
     }
 
@@ -95,12 +103,12 @@ class PagesContainerFragment : MvpAppCompatFragment(), PagesView {
             (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         toolbar.title = getString(R.string.menu_title_archive)
-        onBackPressed()
     }
 
     private fun onBackPressed() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            presenter.openOrCloseArchive()
+            presenter.closeArchiveOrApp()
+
         }
     }
 }

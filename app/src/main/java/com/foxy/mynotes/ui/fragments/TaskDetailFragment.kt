@@ -14,6 +14,7 @@ import com.foxy.mynotes.mvp.presenter.TaskDetailPresenter
 import com.foxy.mynotes.mvp.view.TaskDetailView
 import com.foxy.mynotes.ui.adapters.ItemClickListener
 import com.foxy.mynotes.ui.adapters.SubTasksAdapter
+import com.foxy.mynotes.utils.Page
 import com.foxy.mynotes.utils.showSnackBar
 import com.foxy.mynotes.utils.showSnackBarWithButton
 import com.google.android.material.snackbar.Snackbar
@@ -145,8 +146,7 @@ class TaskDetailFragment : MvpAppCompatFragment(), TaskDetailView {
     }
 
     override fun openTasksListScreen() {
-        val action =
-            PagesContainerFragmentDirections.actionGlobalMainScreen()
+        val action = PagesContainerFragmentDirections.actionGlobalMainScreen(Page.TASKS)
         findNavController().navigate(action)
 
         // TODO: open task tab

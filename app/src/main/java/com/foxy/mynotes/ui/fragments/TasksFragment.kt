@@ -129,18 +129,12 @@ class TasksFragment : MvpAppCompatFragment(), TasksListView {
     }
 
     override fun openEditTaskScreen(id: String) {
-        val action =
-            PagesContainerFragmentDirections.actionTasksToAddEditTasks(
-                id
-            )
+        val action = PagesContainerFragmentDirections.actionTasksToAddEditTasks(id)
         findNavController().navigate(action)
     }
 
     override fun openTaskDetails(id: String) {
-        val action =
-            PagesContainerFragmentDirections.actionTasksToTaskDetail(
-                id
-            )
+        val action = PagesContainerFragmentDirections.actionTasksToTaskDetail(id)
         findNavController().navigate(action)
     }
 
