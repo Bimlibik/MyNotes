@@ -19,9 +19,7 @@ import com.foxy.mynotes.mvp.presenter.TaskPresenter
 import com.foxy.mynotes.mvp.view.TaskView
 import com.foxy.mynotes.ui.adapters.ItemClickListener
 import com.foxy.mynotes.ui.adapters.SubTasksAdapter
-import com.foxy.mynotes.utils.Page
-import com.foxy.mynotes.utils.registerAnimation
-import com.foxy.mynotes.utils.registerExitAnimation
+import com.foxy.mynotes.utils.*
 import kotlinx.android.synthetic.main.fragment_task_add_edit.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -34,11 +32,11 @@ class AddEditTaskFragment : MvpAppCompatFragment(), TaskView {
 
     private var itemListener: ItemClickListener.SubTaskClick = object :ItemClickListener.SubTaskClick {
         override fun onItemClick(subTask: SubTask) {
-            TODO("Change checked status")
+            // TODO: Change checked status
         }
 
         override fun onItemLongClick(subTask: SubTask) {
-            TODO("Open bottom menu")
+            // TODO: open bottom menu
         }
     }
 
@@ -86,7 +84,7 @@ class AddEditTaskFragment : MvpAppCompatFragment(), TaskView {
 
     override fun onTaskLoaded(task: Task) {
         field_title.setText(task.title)
-        field_subtask.requestFocus()
+        field_subtask.showKeyboard()
     }
 
     override fun onSubtasksLoaded(subtasks: List<SubTask>) {
@@ -94,7 +92,7 @@ class AddEditTaskFragment : MvpAppCompatFragment(), TaskView {
     }
 
     override fun onTaskNotAvailable() {
-        field_title.requestFocus()
+        field_title.showKeyboard()
     }
 
     override fun onTaskSaved(id: String) {
@@ -126,15 +124,27 @@ class AddEditTaskFragment : MvpAppCompatFragment(), TaskView {
                 date = NoteAndTaskDate(),
                 defaultTitle = getString(R.string.note_title_is_empty)
             )
+            it.hideKeyboard()
         }
     }
 
     private fun setupKeyboardListener() {
-        field_subtask.setOnEditorActionListener { textView, actionId, keyEvent ->
+        field_subtask.setOnEditorActionListener { _, actionId, _ ->
             when(actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
                     presenter.saveSubtask(field_subtask.text.toString())
                     field_subtask.setText("")
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // for API >= 26
+        field_title.setOnEditorActionListener { _, actionId, _ ->
+            when(actionId) {
+                EditorInfo.IME_ACTION_NEXT -> {
+                    field_subtask.requestFocus()
                     true
                 }
                 else -> false

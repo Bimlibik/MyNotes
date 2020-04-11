@@ -2,6 +2,7 @@ package com.foxy.mynotes.ui.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
@@ -11,13 +12,14 @@ import com.foxy.mynotes.data.entity.Note
 import com.foxy.mynotes.data.entity.NoteAndTaskDate
 import com.foxy.mynotes.mvp.presenter.NotePresenter
 import com.foxy.mynotes.mvp.view.NoteView
-import com.foxy.mynotes.utils.Page
-import com.foxy.mynotes.utils.registerAnimation
-import com.foxy.mynotes.utils.registerExitAnimation
+import com.foxy.mynotes.utils.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_note_add_edit.*
+import kotlinx.android.synthetic.main.fragment_note_add_edit.fab_save
+import kotlinx.android.synthetic.main.fragment_note_add_edit.field_title
+import kotlinx.android.synthetic.main.fragment_note_add_edit.toolbar
 
 class AddEditNoteFragment : MvpAppCompatFragment(), NoteView {
 
@@ -46,6 +48,7 @@ class AddEditNoteFragment : MvpAppCompatFragment(), NoteView {
         onBackPressed()
         setupToolbar()
         setupFab()
+        setupKeyListener()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -61,12 +64,12 @@ class AddEditNoteFragment : MvpAppCompatFragment(), NoteView {
     override fun onNoteLoaded(note: Note) {
         field_title.setText(note.title)
         field_description.setText(note.description)
-        field_description.requestFocus()
+        field_description.showKeyboard()
         field_description.setSelection(field_description.text.length)
     }
 
     override fun onNoteNotAvailable() {
-        field_title.requestFocus()
+        field_title.showKeyboard()
     }
 
     override fun onNoteSaved(id: String) {
@@ -84,6 +87,19 @@ class AddEditNoteFragment : MvpAppCompatFragment(), NoteView {
         registerExitAnimation(context, view!!)
     }
 
+    private fun setupKeyListener() {
+        // for API >= 26
+        field_title.setOnEditorActionListener { _, actionId, _ ->
+            when(actionId) {
+                EditorInfo.IME_ACTION_NEXT -> {
+                    field_description.requestFocus()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
     private fun setupToolbar() {
         if (activity is AppCompatActivity) {
             (activity as AppCompatActivity).setSupportActionBar(toolbar)
@@ -99,6 +115,7 @@ class AddEditNoteFragment : MvpAppCompatFragment(), NoteView {
                 date = NoteAndTaskDate(),
                 defaultTitle = getString(R.string.note_title_is_empty)
             )
+            it.hideKeyboard()
         }
     }
 
